@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sound_studio/screens/main_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:sound_studio/screens/home_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -15,14 +16,13 @@ class LoginScreen extends StatelessWidget {
           return Column(
             children: [
               SizedBox(
-                height: screenHeight * 0.2,
+                height: screenHeight * 0.15,
               ),
               Center(
                 child: Text(
                   'SOUND STUDIO',
-                  style: TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
+                  style: GoogleFonts.bebasNeue(
+                    fontSize: 50,
                   ),
                 ),
               ),
@@ -70,7 +70,7 @@ class LoginScreen extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => MainScreen(),
+                        builder: (context) => HomeScreen(),
                       ));
                 },
                 child: Text(

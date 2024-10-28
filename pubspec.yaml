@@ -9,6 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  google_fonts: ^6.2.1
+  shared_preferences: ^2.3.2
 
 dev_dependencies:
   flutter_test:
@@ -25,3 +27,5 @@ flutter:
     - assets/google_login_icon.png
     - assets/naver_login_icon.png
     - assets/kakao_login_icon.png
+    - assets/left_arrow.png
+    - assets/right_arrow.png
