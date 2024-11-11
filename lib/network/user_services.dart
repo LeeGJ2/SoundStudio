@@ -19,7 +19,6 @@ Future<bool> signup(String email, String nickname, String password) async {
     }
     return false;
   } catch (e) {
-    Fluttertoast.showToast(msg: "회원가입 중 오류가 발생했습니다.");
     print('Signup error: $e');
     return false;
   }
@@ -34,6 +33,9 @@ Future<bool?> login(String email, String password) async {
         'email': email,
         'password': password,
       },
+      options: Options(
+        contentType: Headers.formUrlEncodedContentType,
+      ),
     );
 
     print('status code: ${response.statusCode}');

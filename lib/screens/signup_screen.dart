@@ -63,7 +63,7 @@ class _SignupScreenState extends State<SignupScreen> {
           return Form(
             key: _formkey,
             child: SingleChildScrollView(
-              padding: EdgeInsets.all(screenWidth * 0.2),
+              padding: EdgeInsets.all(screenWidth * 0.15),
               child: Column(
                 children: [
                   Center(
@@ -181,8 +181,8 @@ class _SignupScreenState extends State<SignupScreen> {
                   Row(
                     children: [
                       SizedBox(
-                        height: 24,
-                        width: 24,
+                        height: screenWidth * 0.1,
+                        width: screenWidth * 0.1,
                         child: Checkbox(
                           value: isChecked,
                           onChanged: (bool? value) {
@@ -192,7 +192,6 @@ class _SignupScreenState extends State<SignupScreen> {
                           },
                         ),
                       ),
-                      SizedBox(width: 8),
                       Text('이용약관에 동의합니다'),
                       TextButton(
                         onPressed: () {
