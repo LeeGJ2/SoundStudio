@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sound_studio/network/user_services.dart';
 import 'package:sound_studio/screens/home_screen.dart';
+import 'package:sound_studio/screens/signup_screen.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  LoginScreen({super.key});
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +39,7 @@ class LoginScreen extends StatelessWidget {
                 padding: EdgeInsets.only(
                     left: screenWidth * 0.2, right: screenWidth * 0.2),
                 child: TextFormField(
+                  controller: emailController,
                   decoration: InputDecoration(
                     labelText: '이메일',
                     enabledBorder: OutlineInputBorder(
@@ -40,6 +47,10 @@ class LoginScreen extends StatelessWidget {
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black),
+                    ),
+                    contentPadding: EdgeInsets.symmetric(
+                      vertical: screenHeight * 0.025,
+                      horizontal: screenWidth * 0.02,
                     ),
                   ),
                 ),
@@ -51,6 +62,8 @@ class LoginScreen extends StatelessWidget {
                 padding: EdgeInsets.only(
                     left: screenWidth * 0.2, right: screenWidth * 0.2),
                 child: TextFormField(
+                  controller: passwordController,
+                  obscureText: true,
                   decoration: InputDecoration(
                     labelText: '비밀번호',
                     enabledBorder: OutlineInputBorder(
@@ -59,6 +72,10 @@ class LoginScreen extends StatelessWidget {
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black),
                     ),
+                    contentPadding: EdgeInsets.symmetric(
+                      vertical: screenHeight * 0.025,
+                      horizontal: screenWidth * 0.02,
+                    ),
                   ),
                 ),
               ),
@@ -66,12 +83,26 @@ class LoginScreen extends StatelessWidget {
                 height: screenHeight * 0.02,
               ),
               ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HomeScreen(),
-                      ));
+                onPressed: () async {
+                  final loginResponse = await login(
+                      emailController.text, passwordController.text);
+
+                  print(loginResponse);
+                  if (loginResponse == true) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => HomeScreen(),
+                        ));
+                  } else {
+                    Fluttertoast.showToast(
+                        msg: '이메일 또는 비밀번호를 다시 확인해주세요.',
+                        backgroundColor: Colors.black54,
+                        textColor: Colors.white,
+                        fontSize: 16.0,
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM);
+                  }
                 },
                 child: Text(
                   '로그인',
@@ -92,7 +123,13 @@ class LoginScreen extends StatelessWidget {
                 height: screenHeight * 0.02,
               ),
               TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SignupScreen(),
+                        ));
+                  },
                   child: Text(
                     '회원가입',
                     style: TextStyle(color: Colors.black),
